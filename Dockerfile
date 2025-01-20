@@ -24,7 +24,7 @@ FROM openjdk:17-slim
 WORKDIR /app
 
 # Define a build argument for the version (default is 1.0.1)
-ARG VERSION=1.0.1
+ARG VERSION
 
 # Define the JAR file name dynamically based on the passed version
 ARG JAR_FILE=target/deadlocktest-${VERSION}.jar
