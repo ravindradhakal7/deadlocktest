@@ -1,5 +1,5 @@
 # Use a Debian-based OpenJDK image
-FROM openjdk:17-slim as build
+FROM arm64v8/openjdk:17-jdk-slim as build
 
 # Install Maven using apt-get
 RUN apt-get update && apt-get install -y maven
@@ -18,7 +18,7 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 # Use OpenJDK for the runtime environment (lighter image)
-FROM openjdk:17-slim
+FROM arm64v8/openjdk:17-jdk-slim
 
 # Set working directory inside the container
 WORKDIR /app
