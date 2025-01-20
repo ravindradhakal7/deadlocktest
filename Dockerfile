@@ -23,12 +23,18 @@ FROM openjdk:17-slim
 # Set working directory inside the container
 WORKDIR /app
 
+# Extract the version from pom.xml
+ARG VERSION
+ENV POM_VERSION=$VERSION
+
 # Define build argument for version and use it directly to set JAR file name
 # ARG VERSION
 ARG JAR_FILE=target/deadlocktest.jar
 
 # Copy the built JAR file from the build stage
-COPY --from=build /app/$JAR_FILE /app/deadlocktest.jar
+# COPY --from=build /app/$JAR_FILE /app/deadlocktest.jar
+# Copy the built JAR file from the build stage with version
+COPY --from=build /app/$JAR_FILE-$POM_VERSION.jar /app/deadlocktest.jar
 
 # Expose the port the application will run on
 EXPOSE 8081
