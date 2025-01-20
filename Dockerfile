@@ -24,8 +24,8 @@ FROM openjdk:17-slim
 WORKDIR /app
 
 # Define build argument for version and use it directly to set JAR file name
-ARG VERSION
-ARG JAR_FILE=target/deadlocktest-${VERSION}.jar
+# ARG VERSION
+ARG JAR_FILE=target/deadlocktest.jar
 
 # Copy the built JAR file from the build stage
 COPY --from=build /app/$JAR_FILE /app/deadlocktest.jar
