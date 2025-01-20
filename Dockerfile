@@ -29,7 +29,7 @@ ENV POM_VERSION=$VERSION
 
 # Define build argument for version and use it directly to set JAR file name
 # ARG VERSION
-ARG JAR_FILE=target/deadlocktest{$POM_VERSION}.jar
+ARG JAR_FILE=target/deadlocktest-{$POM_VERSION}.jar
 
 # Copy the built JAR file from the build stage
 # COPY --from=build /app/$JAR_FILE /app/deadlocktest.jar
