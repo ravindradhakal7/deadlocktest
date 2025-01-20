@@ -23,10 +23,13 @@ FROM openjdk:17-slim
 # Set working directory inside the container
 WORKDIR /app
 
-# Define a build argument for the version (default is 1.0.1)
-ARG VERSION
+# Extract version from pom.xml using Maven and set it as a build argument
+RUN VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout) && \
+    echo "VERSION=$VERSION" && \
+    mvn clean package -DskipTests
 
-# Define the JAR file name dynamically based on the passed version
+# Define build argument for version and use it directly to set JAR file name
+ARG VERSION
 ARG JAR_FILE=target/deadlocktest-${VERSION}.jar
 
 # Copy the built JAR file from the build stage
